@@ -2,14 +2,17 @@ import { FaSearch } from "react-icons/fa";
 
 export default function Navbar() {
   return (
-    <nav className="bg-white text-black px-6 py-5 shadow-md">
-      <div className="flex justify-between items-center">
-        
-        {/* Right - Empty */}
-        <div className="w-24"></div>
+    <nav className="bg-white text-black px-6 py-4 shadow-md h-[10vh]">
+      <div className="w-[full] mx-auto flex justify-between items-center h-full">
 
-        {/* Center - Smaller Search Input */}
-        <div className="relative w-full max-w-xs mx-auto">
+        {/* Left: Auth Links */}
+         {/* Right: Placeholder for future items */}
+         <div className="w-24 text-right text-sm text-gray-500">
+          {/* Add profile icon, settings, or notifications here later */}
+        </div>
+
+        {/* Center: Search */}
+        <div className="relative w-full max-w-sm mx-6">
           <input
             type="text"
             placeholder="Search anything..."
@@ -20,8 +23,9 @@ export default function Navbar() {
           </span>
         </div>
 
-        {/* Left - Sign Up / Sign In */}
-        <div className="flex items-center space-x-4 text-sm font-medium">
+      
+
+        <div className="flex items-end space-x-6 text-sm font-medium">
           <a href="#" className="hover:text-blue-500">Sign Up</a>
           <a href="#" className="hover:text-blue-500">Sign In</a>
         </div>

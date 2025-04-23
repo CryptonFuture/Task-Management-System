@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function LeftSidebar() {
   return (
-    <div className="bg-[#FBFAFF] text-gray-700 w-20 h-screen flex flex-col gap-36 p py-4 shadow-md">
+    <div className="bg-[#FBFAFF] text-gray-700 w-20 h-[90vh] flex flex-col gap-36 p py-4 shadow-md">
       {/* Logo */}
       <div className="flex flex-col items-center space-y-0">
         <Image
