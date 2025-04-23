@@ -2,19 +2,16 @@ import React from 'react'
 import LeftSidebar from '../components/(Navbar)/leftsidebar'
 import Navbar from '../components/(Navbar)/navbar'
 
-export default function Dashboardlayout({children}: {children: React.ReactNode}) {
+export default function Dashboardlayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-                <div className="flex min-h-screen">
-                  <LeftSidebar />
-                  <div className="flex-1 flex flex-col">
-                    <Navbar />
-                    <div className="flex-1 ">
-                      {children}
-                    </div>
-                  </div>
-                </div>
-
+      <Navbar />
+      <div className='flex h-[90vh]'>
+        <LeftSidebar />
+        <div className='w-full bg-gray-100 flex flex-col p-[46]'>
+          {children}
+        </div>
+      </div>
     </div>
   )
 }
