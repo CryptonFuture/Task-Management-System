@@ -1,34 +1,35 @@
-import { FaSearch } from "react-icons/fa";
+"use client";
 
-export default function Navbar() {
+import { CiSearch } from "react-icons/ci";
+import { GiHamburgerMenu } from "react-icons/gi";
+import AvatarDropdown from "./avator";
+
+export default function Navbar({
+  setIsOpen,
+}: {
+  setIsOpen: (value: boolean) => void;
+}) {
   return (
-    <nav className="bg-white text-black px-6 py-4 shadow-md h-[10vh]">
-      <div className="w-[full] mx-auto flex justify-between items-center h-full">
-
-        {/* Left: Auth Links */}
-         {/* Right: Placeholder for future items */}
-         <div className="w-24 text-right text-sm text-gray-500">
-          {/* Add profile icon, settings, or notifications here later */}
+    <nav className="bg-white text-black px-6 py-3 shadow-md">
+      <div className="flex justify-between items-center">
+        <div className="md:hidden">
+          <button onClick={() => setIsOpen(true)}>
+            <GiHamburgerMenu className="text-2xl" />
+          </button>
         </div>
 
-        {/* Center: Search */}
-        <div className="relative w-full max-w-sm mx-6">
+        <div className="relative w-full max-w-80 px-4 mx-auto">
           <input
             type="text"
             placeholder="Search anything..."
-            className="w-full pr-10 pl-4 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+            className="w-full pl-4 pr-10 py-3 rounded-[10px] bg-[#F3F7FA] placeholder:text-gray-500 text-sm outline-gray-300"
           />
-          <span className="absolute inset-y-0 right-3 flex items-center text-gray-400">
-            <FaSearch />
+          <span className="absolute right-6 top-1/2 -translate-y-1/2 text-[#94A2BC] text-[25px]">
+            <CiSearch />
           </span>
         </div>
 
-      
-
-        <div className="flex items-end space-x-6 text-sm font-medium">
-          <a href="#" className="hover:text-blue-500">Sign Up</a>
-          <a href="#" className="hover:text-blue-500">Sign In</a>
-        </div>
+        <AvatarDropdown />
       </div>
     </nav>
   );
