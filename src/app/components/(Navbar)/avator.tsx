@@ -22,13 +22,12 @@ export default function AvatarDropdown() {
       )}
       {isLogin && (
         <>
-          {/* Avatar + Arrow */}
           <div
             onClick={() => setIsOpen(!isOpen)}
             className="flex items-center gap-2 cursor-pointer rounded-full p-1transition"
           >
             <Image
-              src="/" // ✅ Replace with your avatar image path
+              src="/"
               alt="Profile"
               width={35}
               height={35}
@@ -37,7 +36,6 @@ export default function AvatarDropdown() {
             <IoIosArrowDown className="text-[#000000] text-[21px]" />
           </div>
 
-          {/* Dropdown Menu */}
 
           {isOpen && (
             <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg z-50">

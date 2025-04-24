@@ -8,16 +8,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [isOpen, setIsOpen] = useState(false); // Closed by default on mobile
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Top Navbar */}
+    <div className="min-h-screen flex flex-col">
       <Navbar setIsOpen={setIsOpen} />
-
-      <div className="flex">
-        {/* Sidebar */}
+      <div className="flex flex-1 overflow-hidden">
         <LeftSidebar isOpen={isOpen} setIsOpen={setIsOpen} />
-
-        {/* Main content */}
-        <main className="w-full mt-4 md:mt-0 p-4 md:p-6">{children}</main>
+        <div className="flex-1 h-[90vh] bg-gray-100 flex flex-col overflow-auto p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12">
+          {children}
+        </div>
       </div>
     </div>
   );
