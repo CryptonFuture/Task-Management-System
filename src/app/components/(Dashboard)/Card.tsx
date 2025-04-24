@@ -1,4 +1,3 @@
-// import { CardProps } from "@/app/types";
 import Image from "next/image";
 
 export default function Card({ Link, title, value, difference }: any) {
@@ -10,12 +9,10 @@ export default function Card({ Link, title, value, difference }: any) {
       </div>
 
       <div className="flex items-center justify-between gap-4">
-        {/* Larger Image on the left */}
         <div className="w-36 h-24 relative flex-shrink-0">
           <Image src={Link} alt={title} fill className="object-contain" />
         </div>
 
-        {/* Text on the right side of the image */}
         <p className="text-sm text-green-600">
           {difference} more <br /> from last week
         </p>
