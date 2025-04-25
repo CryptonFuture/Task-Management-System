@@ -1,6 +1,6 @@
 import React from 'react'
 import TaskCard from '@/app/components/TaskCard/TaskCard'
-import TaskCategories from '@/app/components/TaskCategories/TaskCategories'
+import TaskCategories from '@/app/Dashboard/tasks/TaskCategories/TaskCategories'
 import DashboardLayout from '@/app/Layouts/dashboardLayout'
 
 export default function Tasks() {

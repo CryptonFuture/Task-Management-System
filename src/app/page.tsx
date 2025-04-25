@@ -30,7 +30,7 @@ export default function Home() {
             difference="+6"
             Link="/RedLine.png"
           />
-        </div>
+        </div>     
       </div>
 </DashboardLayout>
   )
