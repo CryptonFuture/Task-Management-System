@@ -17,6 +17,7 @@ export default function Tasks() {
         ],
         progress: '0/8'
     }
+    
 
     return (
         <DashboardLayout>
