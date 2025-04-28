@@ -1,5 +1,6 @@
 import Card from "../components/(Dashboard)/Card";
 import Chart from "../components/(Dashboard)/Chart";
+import TaskRecently from "../components/(Dashboard)/TaskRecently";
 import DashboardLayout from "../Layouts/dashboardLayout";
 
 export default function Dashboard() {
@@ -36,6 +37,8 @@ export default function Dashboard() {
         <div>
           <Chart />
         </div>
+
+        <TaskRecently/>
       </div>
     </DashboardLayout>
   );
