@@ -11,7 +11,6 @@ import {
     DropResult,
 } from '@hello-pangea/dnd';
 
-// 1. Define Types
 type Task = {
     id: string;
     imageSrc: string;
