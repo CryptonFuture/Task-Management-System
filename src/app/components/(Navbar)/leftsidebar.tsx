@@ -20,7 +20,7 @@ export default function LeftSidebar({
   const menuItems = [
     { name: "/", label: "dashboard", icon: <RiDashboardHorizontalLine /> },
     { name: "/Dashboard/tasks", label: "task", icon: <FaTasks /> },
-    { name: "employee", label: "employee", icon: <MdPeopleAlt /> },
+    { name: "/Dashboard/employee", label: "employee", icon: <MdPeopleAlt /> },
     { name: "settings", label: "setting", icon: <IoSettingsOutline /> },
   ];
 
