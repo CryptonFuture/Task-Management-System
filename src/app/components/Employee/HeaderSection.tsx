@@ -1,7 +1,13 @@
 import React from "react";
 import { IoReorderThreeOutline, IoPeople } from "react-icons/io5";
 
-export default function HeaderSection({ title }: { title: number }) {
+interface HeaderSectionprops{
+  title:number
+  filter:string
+  setFilter:(value:string) => void
+}
+
+export default function HeaderSection({ title , filter , setFilter}: HeaderSectionprops ) {
   return (
     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-4 md:px-6 bg-white mt-4 py-3 rounded-[10px] w-full">
       <div className="flex gap-3 items-center flex-wrap">
@@ -12,8 +18,16 @@ export default function HeaderSection({ title }: { title: number }) {
           <span className="text-black font-bold">{title} persons</span>
         </h1>
       </div>
+
+
       <div className="flex gap-2 items-center w-full md:w-auto">
-        <IoPeople className="text-[20px] md:text-[22px]" />
+        <select 
+        value={filter}
+        onChange={(e)=>setFilter(e.target.value)}
+        className="rounded-md   px-3 py-1 outline-none text-sm border border-gray-400" >
+          <option  value="Active">Active</option>
+          <option  value="Inactive">Inactive</option>
+        </select>
         <input
           type="text"
           placeholder="Search payroll or name"
