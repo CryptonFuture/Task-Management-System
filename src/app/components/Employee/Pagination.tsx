@@ -21,7 +21,7 @@ export default function Pagination({
     <div className="flex flex-col items-center sm:flex-row sm:justify-between mt-4 gap-4 w-full text-center sm:text-left">
       <div className="text-sm sm:text-base">
         Showing {(currentPage - 1) * currentitem + 1} to{" "}
-        {Math.min(currentPage * currentitem, totalPages * currentitem)} of{" "}
+        {Math.min(currentPage * currentitem, currentPage * currentitem)} of{" "}
         {totalPages * currentitem}
       </div>
       <ul className="flex flex-wrap justify-center gap-1 bg-white shadow overflow-hidden">

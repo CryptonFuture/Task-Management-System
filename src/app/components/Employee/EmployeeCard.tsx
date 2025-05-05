@@ -14,6 +14,7 @@ export interface EmployeeCardProps {
   date: string;
   imgSrc?: string;
   type: EmploymentType;
+  status:string;
 }
 
 const typeColors = {
@@ -32,6 +33,7 @@ export default function EmployeeCard({
   date,
   type,
   imgSrc,
+  status
 }: EmployeeCardProps) {
   return (
     <div className="w-full flex flex-col justify-between bg-white rounded-lg shadow p-3 text-xs">
@@ -39,23 +41,31 @@ export default function EmployeeCard({
         <button
           className={`text-white text-[10px] px-2 py-[2px] rounded ${typeColors[type]}`}
         >
-          {type}
+          {type}  
         </button>
         <BsThreeDotsVertical className="text-gray-400 text-lg" />
       </div>
       <div className="flex flex-col gap-2 border-b border-gray-200 pb-2">
-        <div className="flex items-center gap-2">
-          <Image
+        <div className="flex justify-between items-center gap-2">
+        <div className="flex ">  <Image
             className="rounded-full object-cover"
             src={imgSrc || "/logo.png"}
             width={30}
             height={30}
             alt={name}
           />
-          <div>
+          <span>
             <h1 className="font-semibold text-gray-800">{name}</h1>
-            <p className="text-[10px] text-gray-500">{email}</p>
+            <p className="text-[10px] text-gray-500">{email}</p></span>
           </div>
+          <h1
+  className={`inline-block px-2 py-1 text mt-1-xs font-semibold text-white rounded-[3px] ${
+    status === "Active" ? "bg-green-500" : "bg-red-500"
+  }`}
+>
+  {status}
+</h1>
+
         </div>
         <div className="flex flex-wrap gap-1">
           <span className="flex items-center gap-1 border border-gray-300 px-2 py-[2px] rounded text-gray-700">
@@ -65,6 +75,7 @@ export default function EmployeeCard({
             {role}
           </span>
         </div>
+        
       </div>
       <div className="mt-2 space-y-1 text-[11px]">
         <div className="flex justify-between text-gray-600">
