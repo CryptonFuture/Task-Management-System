@@ -6,6 +6,9 @@ import HeaderSection from "../components/Employee/HeaderSection";
 import EmployeeCard from "../components/Employee/EmployeeCard";
 import Pagination from "../components/Employee/Pagination";
 import type { EmployeeCardProps } from "../components/Employee/EmployeeCard";
+import { BsPersonPlusFill } from "react-icons/bs";
+import Modal from "../components/Employee/CreateUserModal";
+import EmployeeFormData from "../components/Employee/EmployeeFormData";
 
 const employees: EmployeeCardProps[] = [
   {
@@ -261,24 +264,24 @@ const employees: EmployeeCardProps[] = [
     imgSrc: "/one.png",
     status: "Inactive",
   },
-  
 ];
 
-
 export default function EmployeePage() {
+  const [openModal, setOpenModal] = useState(false);
   const [itemsPerPage, setitemPerPage] = useState(9);
-  const [filter,setFilter] = useState("Active")
+  const [filter, setFilter] = useState("Active");
 
   useEffect(() => {
     const updateitemPerPage = () => {
       if (typeof window !== "undefined") {
-      if (window.innerWidth < 768) {
-        setitemPerPage(6);
-      } else if (window.innerWidth < 1024) {
-        setitemPerPage(8);
-      } else {
-        setitemPerPage(9);
-      }}
+        if (window.innerWidth < 768) {
+          setitemPerPage(6);
+        } else if (window.innerWidth < 1024) {
+          setitemPerPage(8);
+        } else {
+          setitemPerPage(9);
+        }
+      }
     };
 
     updateitemPerPage();
@@ -288,8 +291,9 @@ export default function EmployeePage() {
   }, []);
 
   const filteredEmployees = employees.filter((employee) => {
-    if (employee.status === filter){
-    return employee.status === filter;}
+    if (employee.status === filter) {
+      return employee.status === filter;
+    }
   });
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -298,16 +302,45 @@ export default function EmployeePage() {
   const endIndex = startIndex + itemsPerPage;
   const paginatedEmployees = filteredEmployees.slice(startIndex, endIndex);
 
+  const handleFormSubmit = (data: any) => {
+    console.log("Employee data submitted:", data);
+  };
+
   return (
     <DashboardLayout>
       <div className="my-auto">
-        <div>
+        <div className="flex  justify-between">
           <span className="flex items-center gap-1 pr-2">
             <IoPeople className="text-[25px]" />
             <h1 className="text-[25px] font-extralight">Employee</h1>
           </span>
-          <HeaderSection filter={filter} setFilter={setFilter} title={filteredEmployees.length} />
+          <span className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-gray-700 text-[17px] rounded transition">
+            <button
+              onClick={() => setOpenModal(!openModal)}
+              className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-gray-700 text-[17px] rounded transition"
+            >
+              <BsPersonPlusFill className="text-[22px]" /> Create User
+            </button>
+            {openModal && (
+              <Modal
+                title={"Create New Employee"}
+                create={"Create Employee"}
+                onClose={() => setOpenModal(false)}
+              >
+                <div>
+                  <EmployeeFormData onClose={() => setOpenModal(false)} />
+                </div>
+              </Modal>
+            )}
+          </span>
         </div>
+
+        <HeaderSection
+          filter={filter}
+          setFilter={setFilter}
+          title={filteredEmployees.length}
+        />
+
         <div className="px-4 py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {paginatedEmployees.map((employee, index) => (
             <EmployeeCard key={index} {...employee} />
