@@ -328,7 +328,7 @@ export default function EmployeePage() {
                 onClose={() => setOpenModal(false)}
               >
                 <div>
-                  <EmployeeFormData onClose={() => setOpenModal(false)} />
+                  <EmployeeFormData  onClose={() => setOpenModal(false)} />
                 </div>
               </Modal>
             )}
