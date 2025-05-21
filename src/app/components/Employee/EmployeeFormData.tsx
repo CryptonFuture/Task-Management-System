@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { ImUpload2 } from "react-icons/im";
 import { employeeSchema } from "../Validation/createEmployeeValidation";
+import Image from "next/image";
 
 type FormDataType = {
   name: string;
+  email: string;
   payrollId: string;
   employeeImage: File[];
   employeeType: string;
@@ -16,6 +18,7 @@ type FormDataType = {
 export default function EmployeeFormData({ onClose }: { onClose: () => void }) {
   const [formData, setFormData] = useState<FormDataType>({
     name: "",
+    email: "",
     payrollId: "",
     employeeImage: [],
     employeeType: "Full Time",
@@ -27,7 +30,11 @@ export default function EmployeeFormData({ onClose }: { onClose: () => void }) {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value, type } = e.target;
 
     if (type === "file") {
@@ -51,7 +58,9 @@ export default function EmployeeFormData({ onClose }: { onClose: () => void }) {
   const handleRemoveImage = (indexToRemove: number) => {
     setFormData((prev) => ({
       ...prev,
-      employeeImage: prev.employeeImage.filter((_, index) => index !== indexToRemove),
+      employeeImage: prev.employeeImage.filter(
+        (_, index) => index !== indexToRemove
+      ),
     }));
   };
 
@@ -76,23 +85,47 @@ export default function EmployeeFormData({ onClose }: { onClose: () => void }) {
   return (
     <div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2 text-[14px]">
-
         <div>
-          <label className="font-light text-black ml-1 mb-1 text-[17px]">Employee Name</label>
+          <label className="font-light text-black ml-1 mb-1 text-[17px]">
+            Employee Name
+          </label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
             placeholder="Enter Employee Name"
-            className={`w-full rounded-[5px] border p-2 placeholder:text-[16px] ${errors.name ? "border-red-500" : ""}`}
+            className={`w-full rounded-[5px] border p-2 placeholder:text-[16px] ${
+              errors.name ? "border-red-500" : ""
+            }`}
           />
           {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
         </div>
 
+        <div>
+          <label className="font-light text-black ml-1 mb-1 text-[17px]">
+            Employee Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Enter Your email"
+            className={`w-full rounded-[5px] border p-2 placeholder:text-[16px] ${
+              errors.email ? "border-red-500" : ""
+            }`}
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email}</p>
+          )}
+        </div>
 
         <div className="mb-4">
-          <label htmlFor="employeeImage" className="text-black font-light ml-1 mb-1 text-[17px] block">
+          <label
+            htmlFor="employeeImage"
+            className="text-black font-light ml-1 mb-1 text-[17px] block"
+          >
             Upload Image
           </label>
           <div className="relative">
@@ -111,12 +144,13 @@ export default function EmployeeFormData({ onClose }: { onClose: () => void }) {
           </div>
         </div>
 
-
         {formData.employeeImage.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-2">
             {formData.employeeImage.map((image, index) => (
               <div key={index} className="relative w-[80px] h-[80px]">
-                <img
+                <Image
+                  width={300}
+                  height={300}
                   src={URL.createObjectURL(image)}
                   alt={`preview-${index}`}
                   className="w-full h-full object-cover rounded"
@@ -133,7 +167,6 @@ export default function EmployeeFormData({ onClose }: { onClose: () => void }) {
           </div>
         )}
 
-
         <div className="flex gap-4">
           <div className="w-1/2 flex flex-col">
             <label className="text-black">Employee Type</label>
@@ -146,7 +179,9 @@ export default function EmployeeFormData({ onClose }: { onClose: () => void }) {
               <option value="Full Time">Full Time</option>
               <option value="Part Time">Part Time</option>
             </select>
-            {errors.employeeType && <p className="text-red-500 text-sm">{errors.employeeType}</p>}
+            {errors.employeeType && (
+              <p className="text-red-500 text-sm">{errors.employeeType}</p>
+            )}
           </div>
 
           <div className="w-1/2 flex flex-col">
@@ -158,12 +193,18 @@ export default function EmployeeFormData({ onClose }: { onClose: () => void }) {
               className="w-full border p-2"
             >
               <option value="Finance">Finance</option>
+              <option value="HR">HR</option>
               <option value="Marketing">Marketing</option>
+              <option value="IT">IT</option>
+              <option value="Sales">Sales</option>
+              <option value="Management">Management</option>
+              <option value="Reception">Reception</option>
             </select>
-            {errors.department && <p className="text-red-500 text-sm">{errors.department}</p>}
+            {errors.department && (
+              <p className="text-red-500 text-sm">{errors.department}</p>
+            )}
           </div>
         </div>
-
 
         <div className="flex gap-4">
           <div className="w-1/2 flex flex-col">
@@ -174,10 +215,21 @@ export default function EmployeeFormData({ onClose }: { onClose: () => void }) {
               onChange={handleChange}
               className="w-full border p-2"
             >
-              <option value="Front End Developer">Front End Developer</option>
-              <option value="Content Writer">Content Writer</option>
+              <option value="Lead Accountant">Lead Accountant</option>
+              <option value="Manager">Manager</option>
+              <option value="SEO Expert">SEO Expert</option>
+              <option value="Software Engineer">Software Engineer</option>
+              <option value="Sales Executive">Sales Executive</option>
+              <option value="Regional Manager">Regional Manager</option>
+              <option value="Receptionist">Receptionist</option>
+              <option value="Sales Rep">Sales Rep</option>
+              <option value="Assistant to the Regional Manager">
+                Assistant to the Regional Manager
+              </option>
             </select>
-            {errors.designation && <p className="text-red-500 text-sm">{errors.designation}</p>}
+            {errors.designation && (
+              <p className="text-red-500 text-sm">{errors.designation}</p>
+            )}
           </div>
 
           <div className="w-1/2 flex flex-col">
@@ -187,24 +239,33 @@ export default function EmployeeFormData({ onClose }: { onClose: () => void }) {
               name="joinDate"
               value={formData.joinDate}
               onChange={handleChange}
-              className={`p-[6px] border ${errors.joinDate ? "border-red-500" : ""}`}
+              className={`p-[6px] border ${
+                errors.joinDate ? "border-red-500" : ""
+              }`}
             />
-            {errors.joinDate && <p className="text-red-500 text-sm">{errors.joinDate}</p>}
+            {errors.joinDate && (
+              <p className="text-red-500 text-sm">{errors.joinDate}</p>
+            )}
           </div>
         </div>
 
-
         <div>
-          <label className="font-light text-black ml-1 mb-1 text-[17px]">Payroll ID</label>
+          <label className="font-light text-black ml-1 mb-1 text-[17px]">
+            Payroll ID
+          </label>
           <input
             type="text"
             name="payrollId"
             value={formData.payrollId}
             onChange={handleChange}
             placeholder="Enter Payroll ID"
-            className={`w-full rounded-[5px] border p-2 placeholder:text-[16px] ${errors.payrollId ? "border-red-500" : ""}`}
+            className={`w-full rounded-[5px] border p-2 placeholder:text-[16px] ${
+              errors.payrollId ? "border-red-500" : ""
+            }`}
           />
-          {errors.payrollId && <p className="text-red-500 text-sm">{errors.payrollId}</p>}
+          {errors.payrollId && (
+            <p className="text-red-500 text-sm">{errors.payrollId}</p>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -214,9 +275,13 @@ export default function EmployeeFormData({ onClose }: { onClose: () => void }) {
             value={formData.description}
             onChange={handleChange}
             placeholder="Please share your main reason ..."
-            className={`p-2 border ${errors.description ? "border-red-500" : ""}`}
+            className={`p-2 border ${
+              errors.description ? "border-red-500" : ""
+            }`}
           />
-          {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
+          {errors.description && (
+            <p className="text-red-500 text-sm">{errors.description}</p>
+          )}
         </div>
 
         <div className="flex justify-between py-2 bg-white">
