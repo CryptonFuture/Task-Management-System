@@ -21,7 +21,7 @@ export default function LeftSidebar({
     { name: "/", label: "dashboard", icon: <RiDashboardHorizontalLine /> },
     { name: "/Dashboard/tasks", label: "task", icon: <FaTasks /> },
     { name: "/Dashboard/employee", label: "employee", icon: <MdPeopleAlt /> },
-    { name: "settings", label: "setting", icon: <IoSettingsOutline /> },
+    { name: "/Dashboard/settings", label: "setting", icon: <IoSettingsOutline /> },
   ];
 
   return (
