@@ -1,0 +1,383 @@
+"use client";
+import React, { useEffect, useState } from "react";
+import DashboardLayout from "../Layouts/dashboardLayout";
+import { IoPeople } from "react-icons/io5";
+import HeaderSection from "../components/Employee/HeaderSection";
+import EmployeeCard from "../components/Employee/EmployeeCard";
+import Pagination from "../components/Employee/Pagination";
+import type { EmployeeCardProps } from "../components/Employee/EmployeeCard";
+import { BsPersonPlusFill } from "react-icons/bs";
+import Modal from "../components/Employee/CreateUserModal";
+import EmployeeFormData from "../components/Employee/EmployeeFormData";
+
+const employees: EmployeeCardProps[] = [
+  {
+    id: 1,
+    name: "Jane Cooper",
+    email: "jane.cooper@example.com",
+    department: "Finance",
+    role: "Lead Accountant",
+    payroll: "221d21A232d1",
+    type: "Full-time",
+    date: "2025-02-23",
+    imgSrc: "/one.png",
+    status: "Active",
+  },
+  {
+    id: 2,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    department: "HR",
+    role: "Manager",
+    payroll: "HR-8821",
+    type: "Full-time",
+    date: "2023-01-10",
+    imgSrc: "/two.png",
+    status: "Inactive",
+  },
+  {
+    id: 3,
+    name: "Sarah Smith",
+    email: "sarah.smith@example.com",
+    department: "Marketing",
+    role: "SEO Expert",
+    payroll: "MK-1234",
+    type: "Freelance",
+    date: "2024-03-05",
+    imgSrc: "/three.png",
+    status: "Active",
+  },
+  {
+    id: 4,
+    name: "Ali Khan",
+    email: "ali.khan@example.com",
+    department: "IT",
+    role: "Software Engineer",
+    payroll: "IT-9876",
+    type: "Full-time",
+    date: "2022-05-12",
+    imgSrc: "/four.png",
+    status: "Inactive",
+  },
+  {
+    id: 5,
+    name: "Ayesha Malik",
+    email: "ayesha.malik@example.com",
+    department: "Sales",
+    role: "Sales Executive",
+    payroll: "SL-5643",
+    type: "Part-time",
+    date: "2021-12-02",
+    imgSrc: "/five.png",
+    status: "Active",
+  },
+  {
+    id: 6,
+    name: "Michael Scott",
+    email: "michael.scott@dundermifflin.com",
+    department: "Management",
+    role: "Regional Manager",
+    payroll: "MG-0001",
+    type: "Full-time",
+    date: "2020-04-15",
+    imgSrc: "/six.png",
+    status: "Active",
+  },
+  {
+    id: 7,
+    name: "Pam Beesly",
+    email: "pam.beesly@dundermifflin.com",
+    department: "Reception",
+    role: "Receptionist",
+    payroll: "RC-3322",
+    type: "Part-time",
+    date: "2019-07-09",
+    imgSrc: "/seven.png",
+    status: "Inactive",
+  },
+  {
+    id: 8,
+    name: "Jim Halpert",
+    email: "jim.halpert@dundermifflin.com",
+    department: "Sales",
+    role: "Sales Rep",
+    payroll: "SL-9876",
+    type: "Full-time",
+    date: "2020-11-01",
+    imgSrc: "/eight.png",
+    status: "Active",
+  },
+  {
+    id: 9,
+    name: "Dwight Schrute",
+    email: "dwight.schrute@dundermifflin.com",
+    department: "Sales",
+    role: "Assistant to the Regional Manager",
+    payroll: "SL-1234",
+    type: "Internship",
+    date: "2018-03-14",
+    imgSrc: "/one.png",
+    status: "Inactive",
+  },
+  {
+    id: 10,
+    name: "Sarah Smith",
+    email: "sarah.smith",
+    department: "Marketing",
+    role: "SEO Expert",
+    payroll: "MK-1234",
+    type: "Freelance",
+    date: "2024-03-05",
+    imgSrc: "/three.png",
+    status: "Active",
+  },
+  {
+    id: 11,
+    name: "Ali Khan",
+    email: "ali.khan",
+    department: "IT",
+    role: "Software Engineer",
+    payroll: "IT-9876",
+    type: "Full-time",
+    date: "2022-05-12",
+    imgSrc: "/four.png",
+    status: "Inactive",
+  },
+  {
+    id: 12,
+    name: "Ayesha Malik",
+    email: "ayesha.malik",
+    department: "Sales",
+    role: "Sales Executive",
+    payroll: "SL-5643",
+    type: "Part-time",
+    date: "2021-12-02",
+    imgSrc: "/five.png",
+    status: "Active",
+  },
+  {
+    id: 13,
+    name: "Michael Scott",
+    email: "michael.scott",
+    department: "Management",
+    role: "Regional Manager",
+    payroll: "MG-0001",
+    type: "Full-time",
+    date: "2020-04-15",
+    imgSrc: "/six.png",
+    status: "Active",
+  },
+  {
+    id: 14,
+    name: "Pam Beesly",
+    email: "pam.beesly",
+    department: "Reception",
+    role: "Receptionist",
+    payroll: "RC-3322",
+    type: "Part-time",
+    date: "2019-07-09",
+    imgSrc: "/seven.png",
+    status: "Inactive",
+  },
+  {
+    id: 15,
+    name: "Jim Halpert",
+    email: "jim.halpert",
+    department: "Sales",
+    role: "Sales Rep",
+    payroll: "SL-9876",
+    type: "Full-time",
+    date: "2020-11-01",
+    imgSrc: "/eight.png",
+    status: "Active",
+  },
+  {
+    id: 16,
+    name: "Dwight Schrute",
+    email: "dwight.schrute",
+    department: "Sales",
+    role: "Assistant to the Regional Manager",
+    payroll: "SL-1234",
+    type: "Internship",
+    date: "2018-03-14",
+    imgSrc: "/one.png",
+    status: "Inactive",
+  },
+  {
+    id: 17,
+    name: "Sarah Smith",
+    email: "sarah.smith",
+    department: "Marketing",
+    role: "SEO Expert",
+    payroll: "MK-1234",
+    type: "Freelance",
+    date: "2024-03-05",
+    imgSrc: "/three.png",
+    status: "Active",
+  },
+  {
+    id: 18,
+    name: "Ali Khan",
+    email: "ali.khan",
+    department: "IT",
+    role: "Software Engineer",
+    payroll: "IT-9876",
+    type: "Full-time",
+    date: "2022-05-12",
+    imgSrc: "/four.png",
+    status: "Inactive",
+  },
+  {
+    id: 19,
+    name: "Ayesha Malik",
+    email: "ayesha.malik",
+    department: "Sales",
+    role: "Sales Executive",
+    payroll: "SL-5643",
+    type: "Part-time",
+    date: "2021-12-02",
+    imgSrc: "/five.png",
+    status: "Active",
+  },
+  {
+    id: 20,
+    name: "Michael Scott",
+    email: "michael.scott",
+    department: "Management",
+    role: "Regional Manager",
+    payroll: "MG-0001",
+    type: "Full-time",
+    date: "2020-04-15",
+    imgSrc: "/six.png",
+    status: "Active",
+  },
+  {
+    id: 21,
+    name: "Pam Beesly",
+    email: "pam.beesly",
+    department: "Reception",
+    role: "Receptionist",
+    payroll: "RC-3322",
+    type: "Part-time",
+    date: "2019-07-09",
+    imgSrc: "/seven.png",
+    status: "Inactive",
+  },
+  {
+    id: 22,
+    name: "Jim Halpert",
+    email: "jim.halpert",
+    department: "Sales",
+    role: "Sales Rep",
+    payroll: "SL-9876",
+    type: "Full-time",
+    date: "2020-11-01",
+    imgSrc: "/eight.png",
+    status: "Active",
+  },
+  {
+    id: 23,
+    name: "Dwight Schrute",
+    email: "dwight.schrute",
+    department: "Sales",
+    role: "Assistant to the Regional Manager",
+    payroll: "SL-1234",
+    type: "Internship",
+    date: "2018-03-14",
+    imgSrc: "/one.png",
+    status: "Inactive",
+  },
+];
+
+
+export default function EmployeePage() {
+  const [openModal, setOpenModal] = useState(false);
+  const [itemsPerPage, setitemPerPage] = useState(9);
+  const [filter, setFilter] = useState("Active");
+
+  useEffect(() => {
+    const updateitemPerPage = () => {
+      if (typeof window !== "undefined") {
+        if (window.innerWidth < 768) {
+          setitemPerPage(6);
+        } else if (window.innerWidth < 1024) {
+          setitemPerPage(8);
+        } else {
+          setitemPerPage(9);
+        }
+      }
+    };
+
+    updateitemPerPage();
+    window.addEventListener("resize", updateitemPerPage);
+
+    return () => window.removeEventListener("resize", updateitemPerPage);
+  }, []);
+
+  const filteredEmployees = employees.filter((employee) => {
+    if (employee.status === filter) {
+      return employee.status === filter;
+    }
+  });
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedEmployees = filteredEmployees.slice(startIndex, endIndex);
+
+  const handleFormSubmit = (data: any) => {
+    console.log("Employee data submitted:", data);
+  };
+
+  return (
+    <DashboardLayout>
+      <div className="my-auto">
+        <div className="flex  justify-between">
+          <span className="flex items-center gap-1 pr-2">
+            <IoPeople className="text-[25px]" />
+            <h1 className="text-[25px] font-extralight">Employee</h1>
+          </span>
+          <span className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-gray-700 text-[17px] rounded transition">
+            <button
+              onClick={() => setOpenModal(!openModal)}
+              className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-gray-700 text-[17px] rounded transition"
+            >
+              <BsPersonPlusFill className="text-[22px]" /> Create User
+            </button>
+            {openModal && (
+              <Modal
+                title={"Create New Employee"}
+                create={"Create Employee"}
+                onClose={() => setOpenModal(false)}
+              >
+                <div>
+                  <EmployeeFormData onClose={() => setOpenModal(false)} />
+                </div>
+              </Modal>
+            )}
+          </span>
+        </div>
+
+        <HeaderSection
+          filter={filter}
+          setFilter={setFilter}
+          title={filteredEmployees.length}
+        />
+
+        <div className="px-4 py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {paginatedEmployees.map((employee, index) => (
+            <EmployeeCard key={index} {...employee} />
+          ))}
+        </div>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          currentitem={itemsPerPage}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      </div>
+    </DashboardLayout>
+  );
+}
